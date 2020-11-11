@@ -1,0 +1,11 @@
+{
+  "name": "bfg-node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/bfg-s/node",
+  "author": "bfg",
+  "license": "MIT",
+  "dependencies": {
+
+  }
+}
