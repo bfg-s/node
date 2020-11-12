@@ -1,6 +1,11 @@
 const fs = require('fs');
+const path = require('path');
 
 module.exports = class Fs {
+
+    read_dir (path) {
+        return fs.readdirSync(path);
+    }
 
     stat (path) {
         return fs.lstatSync(path);
@@ -32,6 +37,10 @@ module.exports = class Fs {
         return fs.writeFileSync(file, content);
     }
 
+    append_contents (path, data, options = {}) {
+        return fs.appendFileSync(path, data, options);
+    }
+
     get_contents (file) {
         if (this.is_file(file)) {
             return fs.readFileSync(file).toString();
@@ -39,10 +48,25 @@ module.exports = class Fs {
         return '';
     }
 
+    get_json_contents (file) {
+        let json = [];
+        if (this.is_file(file)) {
+            try {json = JSON.parse(this.get_contents(file));} catch (e) {}
+        }
+        return json;
+    }
+
     path (...paths) {
-        let p = process.env.PWD;
-        paths = paths.filter(i => typeof i == 'string').map(i => app.str.trim(i.trim(), '/')).join('/')
-        if (paths !== '') { p = `/${app.str.trim(p, '/')}/${paths}` }
-        return p;
+        let result = app.str.trim(path.join(...paths), '/');
+        return result === '.' ? '/' : "/" + result;
+    }
+
+    base_path (...paths) {
+        if (0 in paths) paths[0] = app.str.trim(paths[0], '/');
+        return path.resolve(...paths);
+    }
+
+    get pwd () {
+        return process.env.PWD;
     }
 }
