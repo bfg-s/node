@@ -6,6 +6,6 @@
   "author": "bfg",
   "license": "MIT",
   "dependencies": {
-
+    "bfg-js": "^1.0.0"
   }
 }
