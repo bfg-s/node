@@ -3,6 +3,14 @@ const path = require('path');
 
 module.exports = class Fs {
 
+    read_all_dir (dir) {
+        return fs.readdirSync(dir).reduce((files, file) => {
+            const name = path.join(dir, file);
+            const isDirectory = fs.statSync(name).isDirectory();
+            return isDirectory ? [...files, ...this.read_all_dir(name)] : [...files, name];
+        }, [])
+    };
+
     read_dir (path) {
         if (Array.isArray(path)) path = this.path(...path);
         return fs.readdirSync(path);
