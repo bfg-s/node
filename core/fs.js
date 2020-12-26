@@ -85,6 +85,10 @@ module.exports = class Fs {
         return path.resolve(...paths);
     }
 
+    ln (existingPath, newPath) {
+        return fs.linkSync(existingPath, newPath);
+    }
+
     get pwd () {
         return process.env.PWD;
     }
