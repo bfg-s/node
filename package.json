@@ -1,6 +1,6 @@
 {
   "name": "bfg-node",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Helper for simple scripting with cli commands.",
   "main": "index.js",
   "repository": "https://github.com/bfg-s/node",
